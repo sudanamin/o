@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;SquareImageView.java&apos; to &apos;AndroidTutLazyList/src/android.tut.lazylist&apos;&#x0D;&#x0A;- Original project: &apos;MainActivity&apos;&#x0D;&#x0A;- Destination element: &apos;AndroidTutLazyList/src/android.tut.lazylist&apos;&#x0D;&#x0A;- Original element: &apos;com.rogcg.gridviewexample.SquareImageView.java&apos;" description="Copy compilation unit" destination="=AndroidTutLazyList/src&lt;android.tut.lazylist" element1="/src&lt;com.rogcg.gridviewexample{SquareImageView.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1432625283105" units="1" version="1.0"/>
+</session>

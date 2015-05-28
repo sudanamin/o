@@ -1,0 +1,328 @@
+package android.tut.lazylist;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.widget.ListView;
+import android.widget.Toast;
+
+
+
+
+
+
+public class LazyListview extends Activity {
+	ListView list;
+    LazyAdapter adapter;
+    
+
+	
+	
+private static String url = "http://sudan.besaba.com/test.txt";
+	
+	// JSON Node names
+	private static final String TAG_IMAGES = "images";
+	private static final String TAG_ID = "id";
+	private static final String TAG_NAME = "name";
+	private static final String TAG_url = "url";
+	
+	
+	String catg_name[]= {"Catg 1","Catg 2","Catg 3","Catg 4","Catg 5"};
+	String catg_descp[]= {"Catg 1","Catg 2","Catg 3","Catg 4","Catg 5"};
+	String urlss[]= {"sudan.besaba.com/tree1.png",
+		 "sudan.besaba.com/tree2.png",
+		  "sudan.besaba.com/nature1.png",
+		  "sudan.besaba.com/nature2.png",
+		 "sudan.besaba.com/nature3.png"};
+	
+	   String imageUrls[]={
+       		/*"https://v.cdn.vine.co/r/avatars/FBC038AA021049512555535851520_pic-r-13931974061805292839d1f.jpg.jpg?versionId=mzRWdD9ffgH3Fzr1QMKoOJGZQvw6_OmU"*/
+       		/*"http://192.168.43.125/source/fail.png"*/
+               "https://v.cdn.vine.co/r/avatars/FBC038AA021049512555535851520_pic-r-13931974061805292839d1f.jpg.jpg?versionId=mzRWdD9ffgH3Fzr1QMKoOJGZQvw6_OmU"
+               /*,"http://192.168.43.125/source/help.png",
+               "http://192.168.43.125/source/offers.png",
+               "http://192.168.43.125/source/problem.png"*/};
+
+
+	// contacts JSONArray
+	JSONArray images = null;
+ 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_lazy_listview);
+        
+//        String imageUrls[]={
+        		/*"https://v.cdn.vine.co/r/avatars/FBC038AA021049512555535851520_pic-r-13931974061805292839d1f.jpg.jpg?versionId=mzRWdD9ffgH3Fzr1QMKoOJGZQvw6_OmU"*/ 
+        		/*"http://192.168.43.125/source/fail.png"*/
+         //       "https://v.cdn.vine.co/r/avatars/FBC038AA021049512555535851520_pic-r-13931974061805292839d1f.jpg.jpg?versionId=mzRWdD9ffgH3Fzr1QMKoOJGZQvw6_OmU"
+                /*,"http://192.168.43.125/source/help.png",
+                "http://192.168.43.125/source/offers.png",
+                "http://192.168.43.125/source/problem.png"*///};
+        
+        //new MemoryCache().clear();
+		//new FileCache(getApplicationContext()).clear();
+        
+        new AsyncCaller().execute();
+        
+        list=(ListView)findViewById(R.id.listView1);
+        
+        
+   /*     adapter=new LazyAdapter(LazyListview.this, imageUrls,catg_name,catg_descp);
+	        list.setAdapter(adapter);*/
+    //    adapter=new LazyAdapter(this, imageUrls,catg_name,catg_descp);
+   //     list.setAdapter(adapter);
+        
+   //     ArrayList<HashMap<String, String>> contactList = new ArrayList<HashMap<String, String>>();
+
+		// Creating JSON Parser instance
+     //   json jParser = new json();
+
+		// getting JSON string from URL
+	//	JSONObject json = getJSONFromUrl(url);
+	
+
+	/*	try {
+			// Getting Array of Contacts
+			images = json.getJSONArray(TAG_IMAGES);
+		/*	String ids[] = new String[images.length()];
+			String names[] = new String[images.length()];
+			String urls[] = new String[images.length()];
+			
+			// looping through All Contacts
+			for(int i = 0; i < images.length(); i++){
+				JSONObject c = images.getJSONObject(i);
+				
+				// Storing each json item in variable
+				String id = c.getString(TAG_ID);
+				String name = c.getString(TAG_NAME);
+				String url = c.getString(TAG_url);
+				
+				
+				// creating new HashMap
+			//	HashMap<String, String> map = new HashMap<String, String>();
+				
+				// adding each child node to HashMap key => value
+				ids[i] = id; 
+				names[i] = name; 
+				urls[i] = url; 
+				
+				
+				// adding HashList to ArrayList
+				//contactList.add(map);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}*/
+        
+        
+        
+        
+      
+    }
+
+//	private void getimagesnamesandurls() {
+		
+		
+		
+		
+		
+		 
+		
+		
+	/*	ListAdapter adapter = new SimpleAdapter(this, contactList,
+				R.layout.list_item,
+				new String[] { TAG_NAME, TAG_EMAIL, TAG_PHONE_MOBILE }, new int[] {R.id.name, R.id.email, R.id.mobile });
+
+		setListAdapter(adapter);
+
+		// selecting single ListView item
+		ListView lv = getListView();*/
+		
+		
+	//}
+     
+    @Override
+    public void onDestroy()
+    {
+        list.setAdapter(null);
+        super.onDestroy();
+    }
+     
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.lazy_listview, menu);
+		return true;
+	}
+	
+
+	
+
+
+
+private class AsyncCaller extends AsyncTask<String, Void, JSONObject>
+{
+ //   ProgressDialog pdLoading = new ProgressDialog(AsyncExample.this);
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+
+        //this method will be running on UI thread
+      //  pdLoading.setMessage("\tLoading...");
+      //  pdLoading.show();
+    }
+    @Override
+    protected JSONObject doInBackground(String... params) {
+
+        //this method will be running on background thread so don't update UI frome here
+        //do your long running http tasks here,you dont want to pass argument and u can access the parent class' variable url over here
+
+
+    	 InputStream is = null;
+		 JSONObject jObj = null;
+		 String json = "";
+
+		// Making HTTP request
+		try {
+			// defaultHttpClient
+			DefaultHttpClient httpClient = new DefaultHttpClient();
+			HttpPost httpPost = new HttpPost(url);
+
+			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpEntity httpEntity = httpResponse.getEntity();
+			is = httpEntity.getContent();			
+
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					is, "iso-8859-1"), 8);
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			is.close();
+			
+			json = sb.toString();
+			System.out.println("amiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiin"+json);
+		} catch (Exception e) {
+			Log.e("Buffer Error", "Error converting result " + e.toString());
+		}
+
+		// try parse the string to a JSON object
+		try {
+			jObj = new JSONObject(json);
+			System.out.println("ammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmn"+jObj);
+		} catch (JSONException e) {
+			Log.e("JSON Parser", "Error parsing data " + e.toString());
+		}
+
+		// return JSON String
+		return jObj;
+
+	}
+    
+
+    @Override
+    protected void onPostExecute(JSONObject result) {
+    	super.onPostExecute(result);
+
+        //this method will be running on UI thread
+    	
+    	if(result != null)
+        {
+            try
+            {
+            	//JSONObject json = getJSONFromUrl(url);  
+            	
+            	JSONObject jobj = result;
+
+              //  String status = jobj.getString("status");
+            	
+        			// Getting Array of Contacts
+        			images = jobj.getJSONArray(TAG_IMAGES);
+        			String ids[] = new String[images.length()];
+        			String names[] = new String[images.length()];
+        			String urls[] = new String[images.length()];
+        			
+        			// looping through All Contacts
+        			for(int i = 0; i < images.length(); i++){
+        				JSONObject c = images.getJSONObject(i);
+        				
+        				// Storing each json item in variable
+        				String id = c.getString(TAG_ID);
+        				String name = c.getString(TAG_NAME);
+        				String url = c.getString(TAG_url);
+        				
+        				
+        				// creating new HashMap
+        			//	HashMap<String, String> map = new HashMap<String, String>();
+        				
+        				// adding each child node to HashMap key => value
+        				ids[i] = id; 
+        				names[i] = name; 
+        				urls[i] = "http://"+urlss[i]; 
+        				
+        				
+        				Log.e("JSON Parser   ", "Error parsing data urls ld" +urls[i]);
+        				
+        				
+        				// adding HashList to ArrayList
+        				//contactList.add(map);
+        			}
+        			
+        			adapter=new LazyAdapter(LazyListview.this, urls,names,ids);
+   			        list.setAdapter(adapter);
+   			     
+   			     
+        		} catch (JSONException e) {
+        			e.printStackTrace();
+        		}
+            
+            catch (Exception e) 
+            {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            Toast.makeText(LazyListview.this, "Network Problem", Toast.LENGTH_LONG).show();
+        }
+    
+
+}
+
+      //  pdLoading.dismiss();
+    
+
+    }
+}
+
